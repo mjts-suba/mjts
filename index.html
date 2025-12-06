@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MJTS - Social Media Management & Technical Solutions | Vancouver">
+    <title>MJ Technical Solutions</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="static/favico.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <!-- Cloudflare Web Analytics -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "14fa4470d52c4fdf80ac7fb6bb6fafb9"}'></script>
+    <!-- End Cloudflare Web Analytics -->
+    
+    <!-- Cloudflare Turnstile -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="static/logo.png" alt="MJTS Logo" class="logo-img">
+                <!-- <span class="logo-subtitle">MJ Technical Solutions</span> -->
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">MJ Technical Solutions</h1>
+            <p class="hero-title-sub">Creative Solutions for Your Digital Needs</p>
+            <a href="#contact" class="btn btn-primary">Let's Work Together</a>
+        </div>
+        <div class="hero-background"></div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">What We Do</h2>
+            <p class="section-subtitle">A blend of creativity and technical expertise</p>
+            <div class="services-grid">
+                <div class="service-card service-card-1">
+                    <h3>Social Media Management</h3>
+                    <p>Create and manage engaging content across all platforms. Build your brand's voice and grow your community.</p>
+                </div>
+                <div class="service-card service-card-2">
+                    <h3>Web Development</h3>
+                    <p>Build modern, responsive websites that look great and perform flawlessly across all devices.</p>
+                </div>
+                <div class="service-card service-card-4">
+                    <h3>Technical Solutions</h3>
+                    <p>Automation, AI integrations, and custom technical solutions to streamline your workflow and boost efficiency.</p>
+                </div>
+                <div class="service-card service-card-5">
+                    <h3>Analytics & Insights</h3>
+                    <p>Track what matters. Get clear insights into your performance with actionable data and recommendations.</p>
+                </div>
+                <div class="service-card service-card-6">
+                    <h3>Digital Strategy</h3>
+                    <p>End-to-end digital strategies that align with your goals and drive measurable results for your business.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">About MJ Technical Solutions</h2>
+                    <p>Based in Vancouver, MJTS brings together the best of both worlds: creative social media management and technical expertise. We're not just about posting content, we're about building digital experiences that work.</p>
+                    <p>From crafting engaging social media strategies to building custom technical solutions, we help businesses and creators thrive in the digital space. Our approach is simple: combine creative thinking with technical know-how to deliver results that matter. Whether you need help with your social presence, a custom website, or technical automation, we've got you covered.</p>
+                    <p>We believe in doing things differently less corporate speak, more real solutions. Let's build something awesome together.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">Have a project in mind? Let's make it happen!</p>
+            <form id="contact-form" class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <div class="form-group">
+                    <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITE_KEY"></div>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+                <div id="form-message" class="form-message"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 MJTS - MJ Technical Solutions | Vancouver | All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

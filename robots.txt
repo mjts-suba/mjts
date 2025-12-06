@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mjts.ca/sitemap.xml
+
