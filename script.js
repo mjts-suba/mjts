@@ -44,37 +44,53 @@ if (contactForm) {
         const phone = formData.get('phone') || 'N/A';
         const message = formData.get('message');
         
-        // Get Turnstile token - check both input and iframe methods
+        // Get Turnstile token
         let turnstileToken = null;
         
-        // Method 1: Check for hidden input (most common)
+        // Method 1: Check for hidden input by name attribute
         const turnstileTokenInput = document.querySelector('input[name="cf-turnstile-response"]');
-        if (turnstileTokenInput) {
+        if (turnstileTokenInput && turnstileTokenInput.value) {
             turnstileToken = turnstileTokenInput.value;
         }
         
-        // Method 2: Check iframe if input not found
+        // Method 2: Check by ID pattern (fallback)
         if (!turnstileToken) {
-            const turnstileIframe = document.querySelector('.cf-turnstile iframe');
-            if (turnstileIframe) {
-                // If iframe exists but no token, widget might not be completed
-                const turnstileWidget = document.querySelector('.cf-turnstile');
-                const widgetId = turnstileWidget?.getAttribute('data-widget-id');
-                if (widgetId && window.turnstile) {
-                    // Try to get token from widget
-                    try {
+            const turnstileInputById = document.querySelector('input[id^="cf-chl-widget"][id$="_response"]');
+            if (turnstileInputById && turnstileInputById.value) {
+                turnstileToken = turnstileInputById.value;
+            }
+        }
+        
+        // Method 3: Try Turnstile API if available
+        if (!turnstileToken) {
+            const turnstileWidget = document.querySelector('.cf-turnstile');
+            if (turnstileWidget && window.turnstile) {
+                try {
+                    // Get widget ID from data attribute or find it
+                    let widgetId = turnstileWidget.getAttribute('data-widget-id');
+                    if (!widgetId) {
+                        // Try to find widget ID from the input ID
+                        const inputId = turnstileTokenInput?.id;
+                        if (inputId) {
+                            widgetId = inputId.replace('_response', '');
+                        }
+                    }
+                    if (widgetId) {
                         const response = window.turnstile.getResponse(widgetId);
                         if (response) {
                             turnstileToken = response;
                         }
-                    } catch (e) {
-                        console.log('Turnstile getResponse error:', e);
                     }
+                } catch (e) {
+                    console.log('Turnstile getResponse error:', e);
                 }
             }
         }
         
-        if (!turnstileToken || turnstileToken.length === 0) {
+        // Debug log
+        console.log('Turnstile token found:', !!turnstileToken, turnstileToken ? turnstileToken.substring(0, 20) + '...' : 'none');
+        
+        if (!turnstileToken || turnstileToken.trim().length === 0) {
             showMessage('Please complete the security verification.', 'error');
             return;
         }
