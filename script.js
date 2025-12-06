@@ -61,7 +61,7 @@ if (contactForm) {
         
         try {
             // Replace with your Google Apps Script Web App URL
-            const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbw7vA8X0VWaXy_VyRPlDcSV-h79qBXYrcZUwLB78iTRRafJLc1pGH2sLiN9cYKbWSNHtA/exec';
             
             // Prepare data for Google Sheets
             const data = {
