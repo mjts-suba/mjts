@@ -44,11 +44,37 @@ if (contactForm) {
         const phone = formData.get('phone') || 'N/A';
         const message = formData.get('message');
         
-        // Get Turnstile token
-        const turnstileResponse = document.querySelector('.cf-turnstile');
-        const turnstileToken = turnstileResponse?.querySelector('textarea[name="cf-turnstile-response"]')?.value;
+        // Get Turnstile token - check both input and iframe methods
+        let turnstileToken = null;
         
+        // Method 1: Check for hidden input (most common)
+        const turnstileTokenInput = document.querySelector('input[name="cf-turnstile-response"]');
+        if (turnstileTokenInput) {
+            turnstileToken = turnstileTokenInput.value;
+        }
+        
+        // Method 2: Check iframe if input not found
         if (!turnstileToken) {
+            const turnstileIframe = document.querySelector('.cf-turnstile iframe');
+            if (turnstileIframe) {
+                // If iframe exists but no token, widget might not be completed
+                const turnstileWidget = document.querySelector('.cf-turnstile');
+                const widgetId = turnstileWidget?.getAttribute('data-widget-id');
+                if (widgetId && window.turnstile) {
+                    // Try to get token from widget
+                    try {
+                        const response = window.turnstile.getResponse(widgetId);
+                        if (response) {
+                            turnstileToken = response;
+                        }
+                    } catch (e) {
+                        console.log('Turnstile getResponse error:', e);
+                    }
+                }
+            }
+        }
+        
+        if (!turnstileToken || turnstileToken.length === 0) {
             showMessage('Please complete the security verification.', 'error');
             return;
         }
@@ -91,8 +117,9 @@ if (contactForm) {
             contactForm.reset();
             
             // Reset Turnstile widget
-            if (window.turnstile) {
-                const widgetId = turnstileResponse?.getAttribute('data-widget-id');
+            const turnstileWidget = document.querySelector('.cf-turnstile');
+            if (window.turnstile && turnstileWidget) {
+                const widgetId = turnstileWidget.getAttribute('data-widget-id');
                 if (widgetId) {
                     window.turnstile.reset(widgetId);
                 }
